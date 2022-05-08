@@ -1,0 +1,6 @@
+{
+  "block.electromatic.copper_wire": "Copper Wire",
+  "block.electromatic.silver_wire": "Silver Wire",
+  "block.electromatic.gold_wire": "Gold Wire",
+  "block.electromatic.superconductor_wire": "Superconductor Wire"
+}

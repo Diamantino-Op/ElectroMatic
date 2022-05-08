@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "electromatic:white_copper_wire"
+    ]
+  },
+  "criteria": {
+    "has_white_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:white_dye"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "electromatic:white_copper_wire"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_white_dye",
+      "has_the_recipe"
+    ]
+  ]
+}

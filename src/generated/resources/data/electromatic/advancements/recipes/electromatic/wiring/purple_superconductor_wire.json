@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "electromatic:purple_superconductor_wire"
+    ]
+  },
+  "criteria": {
+    "has_purple_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:purple_dye"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "electromatic:purple_superconductor_wire"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_purple_dye",
+      "has_the_recipe"
+    ]
+  ]
+}

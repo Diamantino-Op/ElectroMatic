@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "electromatic:white_gold_wire",
+    "electromatic:orange_gold_wire",
+    "electromatic:magenta_gold_wire",
+    "electromatic:light_blue_gold_wire",
+    "electromatic:yellow_gold_wire",
+    "electromatic:lime_gold_wire",
+    "electromatic:pink_gold_wire",
+    "electromatic:gray_gold_wire",
+    "electromatic:light_gray_gold_wire",
+    "electromatic:cyan_gold_wire",
+    "electromatic:purple_gold_wire",
+    "electromatic:blue_gold_wire",
+    "electromatic:brown_gold_wire",
+    "electromatic:green_gold_wire",
+    "electromatic:red_gold_wire",
+    "electromatic:black_gold_wire"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "electromatic:white_copper_wire",
+    "electromatic:orange_copper_wire",
+    "electromatic:magenta_copper_wire",
+    "electromatic:light_blue_copper_wire",
+    "electromatic:yellow_copper_wire",
+    "electromatic:lime_copper_wire",
+    "electromatic:pink_copper_wire",
+    "electromatic:gray_copper_wire",
+    "electromatic:light_gray_copper_wire",
+    "electromatic:cyan_copper_wire",
+    "electromatic:purple_copper_wire",
+    "electromatic:blue_copper_wire",
+    "electromatic:brown_copper_wire",
+    "electromatic:green_copper_wire",
+    "electromatic:red_copper_wire",
+    "electromatic:black_copper_wire"
+  ]
+}

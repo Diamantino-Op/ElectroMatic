@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "electromatic:white_superconductor_wire",
+    "electromatic:orange_superconductor_wire",
+    "electromatic:magenta_superconductor_wire",
+    "electromatic:light_blue_superconductor_wire",
+    "electromatic:yellow_superconductor_wire",
+    "electromatic:lime_superconductor_wire",
+    "electromatic:pink_superconductor_wire",
+    "electromatic:gray_superconductor_wire",
+    "electromatic:light_gray_superconductor_wire",
+    "electromatic:cyan_superconductor_wire",
+    "electromatic:purple_superconductor_wire",
+    "electromatic:blue_superconductor_wire",
+    "electromatic:brown_superconductor_wire",
+    "electromatic:green_superconductor_wire",
+    "electromatic:red_superconductor_wire",
+    "electromatic:black_superconductor_wire"
+  ]
+}
