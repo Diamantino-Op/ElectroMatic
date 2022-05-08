@@ -1,7 +1,5 @@
 package com.diamantino.electromatic.blocks;
 
-import com.diamantino.electromatic.ElectroMatic;
-import com.diamantino.electromatic.References;
 import com.diamantino.electromatic.api.misc.MinecraftColor;
 import com.diamantino.electromatic.api.wire.electricity.CapabilityElectricDevice;
 import com.diamantino.electromatic.api.wire.electricity.ElectricWireType;
@@ -24,9 +22,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
-public class BlockElectricWire extends BlockEMCableBase implements IEMColoredBlock, EntityBlock {
+public class BlockElectricWire extends BlockEMWireBase implements IEMColoredBlock, EntityBlock {
     final String type;
     final MinecraftColor color;
 

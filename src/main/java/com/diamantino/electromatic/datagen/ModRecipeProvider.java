@@ -1,6 +1,5 @@
 package com.diamantino.electromatic.datagen;
 
-import com.diamantino.electromatic.ElectroMatic;
 import com.diamantino.electromatic.References;
 import com.diamantino.electromatic.api.misc.MinecraftColor;
 import com.diamantino.electromatic.blocks.BlockElectricWire;
@@ -12,8 +11,6 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;

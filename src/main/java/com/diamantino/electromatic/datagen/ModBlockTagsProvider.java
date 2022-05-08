@@ -26,6 +26,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     public String getName() {
-        return "Electromatic Block Tags";
+        return "ElectroMatic Block Tags";
     }
 }

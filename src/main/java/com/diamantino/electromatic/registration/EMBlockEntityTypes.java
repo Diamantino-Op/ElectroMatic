@@ -1,6 +1,7 @@
 package com.diamantino.electromatic.registration;
 
 import com.diamantino.electromatic.References;
+import com.diamantino.electromatic.blocks.BlockElectricWire;
 import com.diamantino.electromatic.tiles.TileEMMicroblock;
 import com.diamantino.electromatic.tiles.TileEMMultipart;
 import com.diamantino.electromatic.tiles.electronics.TileElectricWire;
@@ -18,7 +19,7 @@ public class EMBlockEntityTypes {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, References.MOD_ID);
 
-    public static final RegistryObject<BlockEntityType<TileElectricWire>> wire = BLOCK_ENTITIES.register("wire", () -> BlockEntityType.Builder.of(TileElectricWire::new, EMBlocks.blockWireAll.stream().map(RegistryObject::get).toArray(Block[]::new)).build(null));
+    public static final RegistryObject<BlockEntityType<TileElectricWire>> wire = BLOCK_ENTITIES.register("wire", () -> BlockEntityType.Builder.of(TileElectricWire::new, EMBlocks.blockWireAll.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)).build(null));
     public static final RegistryObject<BlockEntityType<TileEMMultipart>> multipart = BLOCK_ENTITIES.register("multipart", () -> BlockEntityType.Builder.of(TileEMMultipart::new, EMBlocks.multipart.get()).build(null));
     public static final RegistryObject<BlockEntityType<TileEMMicroblock>> microblock = BLOCK_ENTITIES.register("microblock", () -> BlockEntityType.Builder.of(TileEMMicroblock::new, EMBlocks.microblocks.toArray(new Block[0])).build(null));
     public static final RegistryObject<BlockEntityType<TilePipe>> pipe = BLOCK_ENTITIES.register("pipe", () -> BlockEntityType.Builder.of(TilePipe::new, EMBlocks.pipe.get()).build(null));

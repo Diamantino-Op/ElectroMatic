@@ -2,7 +2,7 @@ package com.diamantino.electromatic.tiles.electronics;
 
 import com.diamantino.electromatic.api.misc.MinecraftColor;
 import com.diamantino.electromatic.api.wire.electricity.*;
-import com.diamantino.electromatic.blocks.BlockEMCableBase;
+import com.diamantino.electromatic.blocks.BlockEMWireBase;
 import com.diamantino.electromatic.blocks.BlockElectricWire;
 import com.diamantino.electromatic.client.render.IEMColoredBlock;
 import com.diamantino.electromatic.registration.EMBlockEntityTypes;
@@ -202,7 +202,7 @@ public class TileElectricWire extends TileBase {
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        List<Direction> directions = new ArrayList<>(BlockEMCableBase.FACING.getPossibleValues());
+        List<Direction> directions = new ArrayList<>(BlockEMWireBase.FACING.getPossibleValues());
         if(level != null) {
             BlockState state = getBlockState();
             if (state.getBlock() instanceof BlockElectricWire) {

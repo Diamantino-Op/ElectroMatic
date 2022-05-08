@@ -22,6 +22,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     public String getName() {
-        return "Electromatic Item Tags";
+        return "ElectroMatic Item Tags";
     }
 }

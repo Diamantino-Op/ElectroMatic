@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="[40,)"
 license="All rights reserved"
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
+issueTrackerURL="https://github.com/Diamantino-Op/ElectroMatic/issues"
 [[mods]]
 modId="electromatic"
 version="${file.jarVersion}"
