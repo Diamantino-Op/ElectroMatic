@@ -23,19 +23,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        for (BlockEMWireBase block : EMBlocks.blockCopperWireArray.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)) {
-            makeWire(block);
-        }
-
-        for (BlockEMWireBase block : EMBlocks.blockSilverWireArray.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)) {
-            makeWire(block);
-        }
-
-        for (BlockEMWireBase block : EMBlocks.blockGoldWireArray.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)) {
-            makeWire(block);
-        }
-
-        for (BlockEMWireBase block : EMBlocks.blockSuperconductorWireArray.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)) {
+        for (BlockEMWireBase block : EMBlocks.blockWireAll.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)) {
             makeWire(block);
         }
     }

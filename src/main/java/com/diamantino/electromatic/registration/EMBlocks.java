@@ -27,15 +27,14 @@ import java.util.function.Supplier;
 public class EMBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, References.MOD_ID);
 
-    //TODO: Fix
-
     public static List<RegistryObject<?>> blockList = new ArrayList<>();
     public static List<RegistryObject<BlockEMMicroblock>> microblocks = new ArrayList<>();
 
+    //TODO: Add more wires
     public static List<RegistryObject<BlockElectricWire>> blockCopperWireArray = new ArrayList<>();
-    public static List<RegistryObject<BlockElectricWire>> blockSilverWireArray = new ArrayList<>();
+    /*public static List<RegistryObject<BlockElectricWire>> blockSilverWireArray = new ArrayList<>();
     public static List<RegistryObject<BlockElectricWire>> blockGoldWireArray = new ArrayList<>();
-    public static List<RegistryObject<BlockElectricWire>> blockSuperconductorWireArray = new ArrayList<>();
+    public static List<RegistryObject<BlockElectricWire>> blockSuperconductorWireArray = new ArrayList<>();*/
 
     public static List<RegistryObject<BlockElectricWire>> blockWireAll = new ArrayList<>();
 
@@ -53,7 +52,8 @@ public class EMBlocks {
             blockWireAll.add(block);
         }
 
-        for (MinecraftColor color : MinecraftColor.WIRE_COLORS) {
+        //TODO: Add more wires
+        /*for (MinecraftColor color : MinecraftColor.WIRE_COLORS) {
             String type = ElectricWireType.SILVER.getName();
             RegistryObject<BlockElectricWire> block = registerBlock(MinecraftColor.getName(color) + "_" + type + "_wire", () -> new BlockElectricWire(type, color));
             blockSilverWireArray.add(block);
@@ -72,7 +72,7 @@ public class EMBlocks {
             RegistryObject<BlockElectricWire> block = registerBlock(MinecraftColor.getName(color) + "_" + type + "_wire", () -> new BlockElectricWire(type, color));
             blockSuperconductorWireArray.add(block);
             blockWireAll.add(block);
-        }
+        }*/
 
         //Pipes
         //pipe = new BlockPipe().setRegistryName(References.MOD_ID, "pipe");

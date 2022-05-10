@@ -16,12 +16,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         super(p_126546_, References.MOD_ID, p_126547_);
     }
 
+    //TODO: Add more wires
     @Override
     protected void addTags() {
         this.tag(EMTags.copperWiresBlock).add(EMBlocks.blockCopperWireArray.stream().map(RegistryObject::get).toArray(Block[]::new));
-        this.tag(EMTags.silverWiresBlock).add(EMBlocks.blockSilverWireArray.stream().map(RegistryObject::get).toArray(Block[]::new));
-        this.tag(EMTags.goldWiresBlock).add(EMBlocks.blockGoldWireArray.stream().map(RegistryObject::get).toArray(Block[]::new));
-        this.tag(EMTags.superconductorWiresBlock).add(EMBlocks.blockSuperconductorWireArray.stream().map(RegistryObject::get).toArray(Block[]::new));
+        //this.tag(EMTags.silverWiresBlock).add(EMBlocks.blockSilverWireArray.stream().map(RegistryObject::get).toArray(Block[]::new));
+        //this.tag(EMTags.goldWiresBlock).add(EMBlocks.blockGoldWireArray.stream().map(RegistryObject::get).toArray(Block[]::new));
+        //this.tag(EMTags.superconductorWiresBlock).add(EMBlocks.blockSuperconductorWireArray.stream().map(RegistryObject::get).toArray(Block[]::new));
     }
 
     @Override

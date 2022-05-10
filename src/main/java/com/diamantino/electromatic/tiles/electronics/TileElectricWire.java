@@ -18,7 +18,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -43,14 +42,12 @@ public class TileElectricWire extends TileBase {
 
     public TileElectricWire(BlockPos pos, BlockState state) {
         super(EMBlockEntityTypes.wire.get(), pos, state);
-
-        //setColor(MinecraftColor.WHITE);
     }
 
-    public TileElectricWire(BlockEntityType type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
+    public TileElectricWire(BlockPos pos, BlockState state, MinecraftColor color) {
+        super(EMBlockEntityTypes.wire.get(), pos, state);
 
-        //setColor(MinecraftColor.WHITE);
+        setColor(color);
     }
 
     @Nonnull
@@ -68,12 +65,10 @@ public class TileElectricWire extends TileBase {
         return device.getInsulationColor(null);
     }
 
-    public boolean setColor(MinecraftColor color) {
+    public void setColor(MinecraftColor color) {
         if(device.getInsulationColor(null) != color){
             device.setInsulationColor(color);
-            return true;
         }
-        return false;
     }
 
     @Override
@@ -85,9 +80,9 @@ public class TileElectricWire extends TileBase {
             IElectricDevice.readNBT(CapabilityElectricDevice.ELECTRICITY_CAPABILITY, device, null, nbtstorage);
         }
 
-        /*if(tCompound.contains("color")) {
+        if(tCompound.contains("color")) {
             device.setInsulationColor(MinecraftColor.getColorFromString(tCompound.getString("color")));
-        }*/
+        }
     }
 
     @Override
@@ -96,16 +91,16 @@ public class TileElectricWire extends TileBase {
 
         Tag nbtstorage = IElectricDevice.writeNBT(CapabilityElectricDevice.ELECTRICITY_CAPABILITY, device, null);
         tCompound.put("device", nbtstorage);
-        //tCompound.putString("color", device.getInsulationColor(null).toString());
+        tCompound.putString("color", device.getInsulationColor(null).toString());
     }
 
     @Override
     public void load(@NotNull CompoundTag tCompound) {
 
         super.load(tCompound);
-        /*if(tCompound.contains("color")) {
+        if(tCompound.contains("color")) {
             device.setInsulationColor(MinecraftColor.getColorFromString(tCompound.getString("color")));
-        }*/
+        }
         readFromPacketNBT(tCompound);
     }
 
@@ -113,7 +108,7 @@ public class TileElectricWire extends TileBase {
     protected void saveAdditional(@NotNull CompoundTag tCompound) {
 
         super.saveAdditional(tCompound);
-        //tCompound.putString("color", device.getInsulationColor(null).toString());
+        tCompound.putString("color", device.getInsulationColor(null).toString());
         writeToPacketNBT(tCompound);
     }
 
@@ -142,17 +137,21 @@ public class TileElectricWire extends TileBase {
                                             if (cap.getChange().type == Change.ChangeType.ADDED) {
                                                 Electricity elect = cap.getElectricityValue(facing.getOpposite());
 
-                                                thisCap.setElectricityValue(null, new Electricity(elect.getVoltage() + cap.getChange().volatageChange, elect.getAmperage() + cap.getChange().amperageChange));
+                                                if (elect.getVoltage() + cap.getChange().volatageChange <= Float.MAX_VALUE || elect.getAmperage() + cap.getChange().amperageChange <= Float.MAX_VALUE) {
+                                                    thisCap.setElectricityValue(null, new Electricity(elect.getVoltage() + cap.getChange().volatageChange, elect.getAmperage() + cap.getChange().amperageChange));
 
-                                                thisCap.setChange(new Change(cap.getChange().volatageChange, cap.getChange().amperageChange, facing, Change.ChangeType.ADDED, true));
+                                                    thisCap.setChange(new Change(cap.getChange().volatageChange, cap.getChange().amperageChange, facing, Change.ChangeType.ADDED, true));
+                                                }
 
                                                 cap.getChange().resetChange();
                                             } else {
                                                 Electricity elect = cap.getElectricityValue(facing.getOpposite());
 
-                                                thisCap.setElectricityValue(null, new Electricity(elect.getVoltage() - cap.getChange().volatageChange, elect.getAmperage() - cap.getChange().amperageChange));
+                                                if (elect.getVoltage() - cap.getChange().volatageChange <= Float.MIN_VALUE || elect.getAmperage() - cap.getChange().amperageChange <= Float.MIN_VALUE) {
+                                                    thisCap.setElectricityValue(null, new Electricity(elect.getVoltage() - cap.getChange().volatageChange, elect.getAmperage() - cap.getChange().amperageChange));
 
-                                                thisCap.setChange(new Change(cap.getChange().volatageChange, cap.getChange().amperageChange, facing, Change.ChangeType.REMOVED, true));
+                                                    thisCap.setChange(new Change(cap.getChange().volatageChange, cap.getChange().amperageChange, facing, Change.ChangeType.REMOVED, true));
+                                                }
 
                                                 cap.getChange().resetChange();
                                             }
@@ -174,17 +173,21 @@ public class TileElectricWire extends TileBase {
                                             if (cap.getChange().type == Change.ChangeType.ADDED) {
                                                 Electricity elect = cap.getElectricityValue(facing.getOpposite());
 
-                                                thisCap.setElectricityValue(null, new Electricity(elect.getVoltage() + cap.getChange().volatageChange, elect.getAmperage() + cap.getChange().amperageChange));
+                                                if (elect.getVoltage() + cap.getChange().volatageChange <= Float.MAX_VALUE || elect.getAmperage() + cap.getChange().amperageChange <= Float.MAX_VALUE) {
+                                                    thisCap.setElectricityValue(null, new Electricity(elect.getVoltage() + cap.getChange().volatageChange, elect.getAmperage() + cap.getChange().amperageChange));
 
-                                                thisCap.setChange(new Change(cap.getChange().volatageChange, cap.getChange().amperageChange, facing, Change.ChangeType.ADDED, true));
+                                                    thisCap.setChange(new Change(cap.getChange().volatageChange, cap.getChange().amperageChange, facing, Change.ChangeType.ADDED, true));
+                                                }
 
                                                 cap.getChange().resetChange();
                                             } else {
                                                 Electricity elect = cap.getElectricityValue(facing.getOpposite());
 
-                                                thisCap.setElectricityValue(null, new Electricity(elect.getVoltage() - cap.getChange().volatageChange, elect.getAmperage() - cap.getChange().amperageChange));
+                                                if (elect.getVoltage() - cap.getChange().volatageChange <= Float.MIN_VALUE || elect.getAmperage() - cap.getChange().amperageChange <= Float.MIN_VALUE) {
+                                                    thisCap.setElectricityValue(null, new Electricity(elect.getVoltage() - cap.getChange().volatageChange, elect.getAmperage() - cap.getChange().amperageChange));
 
-                                                thisCap.setChange(new Change(cap.getChange().volatageChange, cap.getChange().amperageChange, facing, Change.ChangeType.REMOVED, true));
+                                                    thisCap.setChange(new Change(cap.getChange().volatageChange, cap.getChange().amperageChange, facing, Change.ChangeType.REMOVED, true));
+                                                }
 
                                                 cap.getChange().resetChange();
                                             }
@@ -213,30 +216,12 @@ public class TileElectricWire extends TileBase {
                 directions.removeIf(d -> level.getBlockState(worldPosition.relative(d)).getBlock() instanceof BlockElectricWire
                         && level.getBlockState(worldPosition.relative(d)).getValue(BlockElectricWire.FACING) != state.getValue(BlockElectricWire.FACING));
 
-                BlockElectricWire wire = null;
-
-                if (level.getBlockState(worldPosition).getBlock() instanceof BlockElectricWire) {
-                    wire = (BlockElectricWire) level.getBlockState(worldPosition).getBlock();
-
-                    //Make sure the cable is the same color or none
-                    if (wire.getColor() != MinecraftColor.NONE) {
-                        BlockElectricWire finalWire = wire;
-                        directions.removeIf(d -> {
-                            BlockEntity tile = level.getBlockEntity(worldPosition.relative(d));
-
-                            BlockElectricWire oppositeWire = null;
-
-                            if (level.getBlockState(worldPosition.relative(d)).getBlock() instanceof BlockElectricWire) {
-                                oppositeWire = (BlockElectricWire) level.getBlockState(worldPosition.relative(d)).getBlock();
-
-                                //return tile instanceof TileElectricWire && !(((TileElectricWire) tile).device.getInsulationColor(d) == device.getInsulationColor(d.getOpposite()) || ((TileElectricWire) tile).device.getInsulationColor(d) == MinecraftColor.NONE);
-                                return tile instanceof TileElectricWire && !(finalWire.getColor() == oppositeWire.getColor()) || (finalWire.getColor() == MinecraftColor.NONE);
-                            }
-
-                            return true;
-                        });
-                    }
-                }
+                //Make sure the cable is the same color or none
+                if(device.getInsulationColor(null) != MinecraftColor.NONE)
+                directions.removeIf(d -> {
+                    BlockEntity tile = level.getBlockEntity(worldPosition.relative(d));
+                    return tile instanceof TileElectricWire && !(((TileElectricWire) tile).device.getInsulationColor(d) == device.getInsulationColor(d.getOpposite()) || ((TileElectricWire) tile).device.getInsulationColor(d) == MinecraftColor.NONE);
+                });
             }
         }
 

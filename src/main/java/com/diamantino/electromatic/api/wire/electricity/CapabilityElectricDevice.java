@@ -11,9 +11,11 @@ import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 public class CapabilityElectricDevice {
 
     public static Capability<IElectricDevice> ELECTRICITY_CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
+    public static Capability<IBundledDevice> BUNDLED_ELECTRICITY_CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
 
     public static void register(RegisterCapabilitiesEvent event){
         event.register(IElectricDevice.class);
+        event.register(IBundledDevice.class);
     }
 
 }

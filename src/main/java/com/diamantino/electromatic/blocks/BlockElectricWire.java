@@ -30,7 +30,7 @@ public class BlockElectricWire extends BlockEMWireBase implements IEMColoredBloc
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return new TileElectricWire(pos, state);
+        return new TileElectricWire(pos, state, color);
     }
 
     @Override
@@ -42,8 +42,6 @@ public class BlockElectricWire extends BlockEMWireBase implements IEMColoredBloc
         super(1,2F);
         this.type = type;
         this.color = color;
-
-        //setRegistryName(References.MOD_ID + ":" + MinecraftColor.getName(color) + "_" + type + "_wire");
     }
 
     public BlockElectricWire(String type, MinecraftColor color, float width, float height) {

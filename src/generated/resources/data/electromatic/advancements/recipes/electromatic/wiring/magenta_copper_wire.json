@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "electromatic:magenta_copper_wire"
+    ]
+  },
+  "criteria": {
+    "has_magenta_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:magenta_dye"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "electromatic:magenta_copper_wire"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_magenta_dye",
+      "has_the_recipe"
+    ]
+  ]
+}

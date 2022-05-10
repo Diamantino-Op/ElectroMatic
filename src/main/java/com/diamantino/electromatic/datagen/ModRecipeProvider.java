@@ -26,7 +26,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         int i = 0;
         for (BlockElectricWire copper_wire : EMBlocks.blockCopperWireArray.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)) {
-            ShapedRecipeBuilder.shaped(copper_wire)
+            ShapedRecipeBuilder.shaped(copper_wire, 8)
                     .define('C', EMTags.copperWiresItem)
                     .define('D', MinecraftColor.getDyeFromColor(MinecraftColor.WIRE_COLORS[i]))
                     .pattern("CCC")
@@ -38,9 +38,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             i++;
         }
 
-        int j = 0;
+        //TODO: Add more wires
+        /*int j = 0;
         for (BlockElectricWire silver_wire : EMBlocks.blockSilverWireArray.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)) {
-            ShapedRecipeBuilder.shaped(silver_wire)
+            ShapedRecipeBuilder.shaped(silver_wire, 8)
                     .define('C', EMTags.silverWiresItem)
                     .define('D', MinecraftColor.getDyeFromColor(MinecraftColor.WIRE_COLORS[j]))
                     .pattern("CCC")
@@ -54,7 +55,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         int k = 0;
         for (BlockElectricWire gold_wire : EMBlocks.blockGoldWireArray.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)) {
-            ShapedRecipeBuilder.shaped(gold_wire)
+            ShapedRecipeBuilder.shaped(gold_wire, 8)
                     .define('C', EMTags.goldWiresItem)
                     .define('D', MinecraftColor.getDyeFromColor(MinecraftColor.WIRE_COLORS[k]))
                     .pattern("CCC")
@@ -68,7 +69,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         int l = 0;
         for (BlockElectricWire superconductor_wire : EMBlocks.blockSuperconductorWireArray.stream().map(RegistryObject::get).toArray(BlockElectricWire[]::new)) {
-            ShapedRecipeBuilder.shaped(superconductor_wire)
+            ShapedRecipeBuilder.shaped(superconductor_wire, 8)
                     .define('C', EMTags.superconductorWiresItem)
                     .define('D', MinecraftColor.getDyeFromColor(MinecraftColor.WIRE_COLORS[l]))
                     .pattern("CCC")
@@ -78,7 +79,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                             .of(MinecraftColor.getDyeFromColor(MinecraftColor.WIRE_COLORS[l])).build()))
                     .save(pFinishedRecipeConsumer, new ResourceLocation(References.MOD_ID, MinecraftColor.getName(MinecraftColor.WIRE_COLORS[l]) + "_superconductor_wire"));
             l++;
-        }
+        }*/
     }
 
     @Override

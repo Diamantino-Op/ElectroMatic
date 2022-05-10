@@ -12,12 +12,13 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         super(p_126546_, blockTagsProvider, References.MOD_ID, p_126547_);
     }
 
+    //TODO: Add more wires
     @Override
     protected void addTags() {
         this.copy(EMTags.copperWiresBlock, EMTags.copperWiresItem);
-        this.copy(EMTags.silverWiresBlock, EMTags.silverWiresItem);
+        /*this.copy(EMTags.silverWiresBlock, EMTags.silverWiresItem);
         this.copy(EMTags.goldWiresBlock, EMTags.goldWiresItem);
-        this.copy(EMTags.superconductorWiresBlock, EMTags.superconductorWiresItem);
+        this.copy(EMTags.superconductorWiresBlock, EMTags.superconductorWiresItem);*/
     }
 
     @Override

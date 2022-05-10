@@ -27,12 +27,22 @@ public interface IBundledDevice {
     /**
      * Sets the power level on the specified side to a set power level.
      */
-    public void setBundledPower(Direction side, Electricity[] power);
+    public void setBundledElectricity(Direction side, Electricity[] electricity);
 
     /**
      * Gets the input of this device on the specified side.
      */
-    public Electricity[] getBundledPower(Direction side);
+    public Electricity[] getBundledElectricity(Direction side);
+
+    /**
+     * Gets the change of the power of the device.
+     */
+    public Change[] getBundledChange();
+
+    /**
+     * Sets the change of the power of the device.
+     */
+    public void setBundledChange(Change[] changed);
 
     /**
      * Notifies the device of a power change. (Usually called after propagation)
