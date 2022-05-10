@@ -213,13 +213,29 @@ public class TileElectricWire extends TileBase {
                 directions.removeIf(d -> level.getBlockState(worldPosition.relative(d)).getBlock() instanceof BlockElectricWire
                         && level.getBlockState(worldPosition.relative(d)).getValue(BlockElectricWire.FACING) != state.getValue(BlockElectricWire.FACING));
 
+                BlockElectricWire wire = null;
 
-                //Make sure the cable is the same color or none
-                if(device.getInsulationColor(null) != MinecraftColor.NONE) {
-                    directions.removeIf(d -> {
-                        BlockEntity tile = level.getBlockEntity(worldPosition.relative(d));
-                        return tile instanceof TileElectricWire && !(((TileElectricWire) tile).device.getInsulationColor(d) == device.getInsulationColor(d.getOpposite()) || ((TileElectricWire) tile).device.getInsulationColor(d) == MinecraftColor.NONE);
-                    });
+                if (level.getBlockState(worldPosition).getBlock() instanceof BlockElectricWire) {
+                    wire = (BlockElectricWire) level.getBlockState(worldPosition).getBlock();
+
+                    //Make sure the cable is the same color or none
+                    if (wire.getColor() != MinecraftColor.NONE) {
+                        BlockElectricWire finalWire = wire;
+                        directions.removeIf(d -> {
+                            BlockEntity tile = level.getBlockEntity(worldPosition.relative(d));
+
+                            BlockElectricWire oppositeWire = null;
+
+                            if (level.getBlockState(worldPosition.relative(d)).getBlock() instanceof BlockElectricWire) {
+                                oppositeWire = (BlockElectricWire) level.getBlockState(worldPosition.relative(d)).getBlock();
+
+                                //return tile instanceof TileElectricWire && !(((TileElectricWire) tile).device.getInsulationColor(d) == device.getInsulationColor(d.getOpposite()) || ((TileElectricWire) tile).device.getInsulationColor(d) == MinecraftColor.NONE);
+                                return tile instanceof TileElectricWire && !(finalWire.getColor() == oppositeWire.getColor()) || (finalWire.getColor() == MinecraftColor.NONE);
+                            }
+
+                            return true;
+                        });
+                    }
                 }
             }
         }

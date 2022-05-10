@@ -70,25 +70,17 @@ public class BlockElectricWire extends BlockEMWireBase implements IEMColoredBloc
         builder.add(FACING, CONNECTED_FRONT, CONNECTED_BACK, CONNECTED_LEFT, CONNECTED_RIGHT, JOIN_FRONT, JOIN_BACK, JOIN_LEFT, JOIN_RIGHT, WATERLOGGED);
     }
 
+    public MinecraftColor getColor() {
+        return color;
+    }
+
     @Override
     public int getColor(BlockState state, BlockGetter world, BlockPos pos, int tintIndex) {
-        //Color for Block
-        BlockEntity tile = (world.getBlockEntity(pos));
-        if(tile instanceof TileEMMultipart){
-            tile = ((TileEMMultipart)tile).getTileForState(state);
-        }
-        if(tile instanceof TileElectricWire && tintIndex == 1) {
-            tile.getCapability(CapabilityElectricDevice.ELECTRICITY_CAPABILITY).orElse(null).setInsulationColor(color);
-        }
         return color.getHex();
     }
 
     @Override
     public int getColor(ItemStack stack, int tintIndex) {
-        //Color for Block
-        /*MinecraftColor color = MinecraftColor.BLUE;
-        if(stack.getTag() != null && stack.getTag().contains("color"))
-            color = MinecraftColor.getColorFromString(stack.getTag().getString("color"));*/
         return tintIndex == 1 ? color.getHex() : tintIndex == 2 ? ElectricWireType.getTypeFromName(type).getColor() : -1;
     }
 
