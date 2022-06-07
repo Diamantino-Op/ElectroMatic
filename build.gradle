@@ -7,6 +7,7 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.parchmentmc:librarian:1.+'
+        classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
 
@@ -15,6 +16,7 @@ plugins {
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'org.spongepowered.mixin'
 
 
 version = '1.0.0'
@@ -26,7 +28,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 minecraft {
     mappings channel: 'parchment', version: '2022.05.02-1.18.2'
 
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
@@ -103,26 +105,113 @@ repositories {
     // }
 
     maven {
-        url "https://www.cursemaven.com"
+        name 'thiakil'
+        url 'https://maven.thiakil.com'
         content {
-            includeGroup "curse.maven"
+            includeGroup 'de.oceanlabs.mcp'
+            includeGroup 'net.minecraft'//custom mappings
         }
     }
     maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
+        name 'prog'
+        url 'https://dvs1.progwml6.com/files/maven'
+        content {
+            includeGroup 'mezz.jei'
+        }
+    }
+    maven {
+        name 'CraftTweaker'
+        url "https://maven.blamejared.com"
+        content {
+            includeGroup 'com.blamejared.crafttweaker'
+            includeGroup 'com.blamejared.jeitweaker'
+        }
+    }
+    maven {
+        name 'curios'
+        url "https://maven.theillusivec4.top/"
+        content {
+            includeGroup 'top.theillusivec4.curios'
+        }
+    }
+    maven {
+        name 'tterrag'
+        url 'https://maven.tterrag.com/'
+        content {
+            includeGroup 'team.chisel.ctm'
+        }
+    }
+    maven {
+        name 'CurseMaven'
+        url 'https://www.cursemaven.com'
+        content {
+            includeGroup 'curse.maven'
+        }
+    }
+    maven {
+        name 'Modmaven'
+        url 'https://modmaven.dev/'
+        content {
+            includeGroup 'appeng'
+            includeGroup 'mcjty.theoneprobe'
+        }
     }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.19'
 
-    //deobfCompile "li.cil.oc:OpenComputers:MC1.12.2-1.7.4.153:api"
-    //compile "net.industrial-craft:industrialcraft-2:2.8.99-ex112:api"
-    implementation fg.deobf("curse.maven:jade-324717:3681459")
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.5.174:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.5.174")
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junit_version}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junit_version}"
+    //We use https://github.com/quicktheories/QuickTheories to allow for implementing property based testing
+    testImplementation "org.quicktheories:quicktheories:${quicktheories_version}"
+
+    compileOnly "org.jetbrains:annotations:${jb_annotations}"
+
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+
+    //TODO: Re-enable in dev once https://github.com/Chisel-Team/ConnectedTexturesMod/issues/174 is fixed
+    //runtimeOnly fg.deobf("team.chisel.ctm:CTM:${minecraft_version}-${ctm_version}")
+
+    //TODO: Remove having to specify these as non transitive once https://github.com/McJtyMods/TheOneProbe/issues/548 is fixed
+    compileOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${top_version}:api") {
+        transitive = false
+    }
+    runtimeOnly fg.deobf("mcjty.theoneprobe:theoneprobe:${top_version}") {
+        transitive = false
+    }
+
+    compileOnly fg.deobf("curse.maven:jade-api-324717:${jade_api_id}")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
+
+    implementation fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${minecraft_version}:${crafttweaker_version}")
+    implementation fg.deobf("com.blamejared.jeitweaker:JEITweaker-${minecraft_version}:${jeitweaker_version}")
+
+    //Mods we have dependencies on but don't bother loading into the dev environment
+    compileOnly fg.deobf("curse.maven:projecte-api-226410:${projecte_api_id}")
+    //TODO - 1.18: Support flux networks again when it ports
+    //compileOnly fg.deobf("curse.maven:flux-networks-248020:${flux_networks_id}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${minecraft_version}-${curios_version}:api")
+    compileOnly fg.deobf("curse.maven:opencomputers2-437654:${oc2_id}")
+    def cc = fg.deobf("curse.maven:cc-tweaked-282001:${cc_tweaked_id}")
+    compileOnly cc
+    //We require cc tweaked so that our CCArgumentWrapper tests can load, so expose it to the test runtime
+    testRuntimeOnly cc
+    compileOnly fg.deobf("curse.maven:female-gender-forge-481655:${wildfire_gender_mod_id}")
+
+    //Dependencies for data generators for mod compat reference
+    implementation fg.deobf("appeng:appliedenergistics2:${ae2_version}")
+    implementation fg.deobf("curse.maven:biomes-o-plenty-api-220318:${biomesoplenty_api_id}")
+    implementation fg.deobf("curse.maven:biomes-o-plenty-220318:${biomesoplenty_id}")
+    implementation fg.deobf("curse.maven:terrablender-563928:${terrablender_id}")//Biomes O' Plenty dep
+    implementation fg.deobf("curse.maven:biomes-youll-go-247560:${byg_id}")
+    implementation fg.deobf("curse.maven:i-like-wood-324164:${ilikewood_id}")
+    implementation fg.deobf("curse.maven:i-like-wood-biomes-o-plenty-437203:${ilikewood_bop_id}")
+    implementation fg.deobf("curse.maven:i-like-wood-oh-the-biomes-youll-go-475110:${ilikewood_byg_id}")
+    runtimeOnly fg.deobf("curse.maven:projecte-226410:${projecte_id}")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
